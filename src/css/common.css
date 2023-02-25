@@ -16,3 +16,29 @@ img {
   display: block;
   max-width: 100%;
 }
+
+.list__item {
+  margin-bottom: 10px;
+
+}
+.list__link {
+  font-size: 18px;
+  color: #586469;
+  font-weight: 800;
+  text-transform: uppercase;  
+}
+
+.btn {
+  font-size: 20px;
+
+  display: inline-block;
+  padding: 10px 15px;
+  margin-right: 20px;
+
+  border: none;
+  background-color: #CCDDFF;
+  box-shadow: 10px 5px 15px 1px #000000;
+  border-radius: 5px 5px 5px 5px;
+  text-shadow: 3px 1px 11px #000000;
+  
+}
