@@ -7,30 +7,34 @@
     <link rel="stylesheet" href="css/common.css" />
   </head>
   <body>
+    
     <p><a class="list__link" href="index.html">Go back</a></p>
 
-    <input type="text" id="datetime-picker" />
-    <button type="button" data-start>Start</button>
+    <section class="section">
+      <input class="input__date" type="text" id="datetime-picker" />
+    <button class="btn" type="button" data-start>Start</button>
 
     <div class="timer timer__flex ">
       <div class="field field__flex">
         <span class="value" data-days>00</span>
-        <span class="label">Days</span>
+        <span class="label calendar">Days</span>
       </div>
       <div class="field field__flex">
         <span class="value" data-hours>00</span>
-        <span class="label">Hours</span>
+        <span class="label calendar">Hours</span>
       </div>
       <div class="field field__flex">
         <span class="value" data-minutes>00</span>
-        <span class="label">Minutes</span>
+        <span class="label calendar">Minutes</span>
       </div>
       <div class="field field__flex">
         <span class="value" data-seconds>00</span>
-        <span class="label">Seconds</span>
+        <span class="label calendar">Seconds</span>
       </div>
     </div>
 
+    </section>
+    
     <script src="js/02-timer.js" type="module"></script>
   </body>
 </html>
