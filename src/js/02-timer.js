@@ -2,7 +2,6 @@
  * Напиши скрипт таймера, який здійснює зворотний відлік до певної дати.
 1. Використовуй бібліотеку flatpickr для того, щоб дозволити користувачеві кросбраузерно
  вибрати кінцеву дату і час в одному елементі інтерфейсу.
-2. 
  */
 
 import flatpickr from "flatpickr";
@@ -16,10 +15,8 @@ const valueHours = document.querySelector('[data-hours]');
 const valueMinutes = document.querySelector('[data-minutes]');
 const valueSeconds = document.querySelector('[data-seconds]');
 
-console.log(valueDays);
+// початковий стан кнопки "Start" - неактивна
 btnStart.disabled = true;
-let isTimerStarted = false; // змінна, яка буде відстежувати стан таймера
-
 
 
 btnStart.addEventListener('click', onBtnStartClick);
@@ -34,25 +31,28 @@ const options = {
 	defaultDate: new Date(),
 		// регулює крок для введення хвилин
 	minuteIncrement: 1, 	
+	
 		// викликається щоразу під час закриття елемента інтерфейсу, який створює flatpickr
 		// тут треба обробляти дату, обрану користувачем
 		// Параметр selectedDates - це масив обраних дат
 	onClose(selectedDates) { 	
 
-		  console.log(selectedDates[0]);
 			// Якщо користувач вибрав дату в минулому:
 		if (selectedDates[0] < Date.now())
 		{
 				// виводить попередження з використанням бібліотеки Notiflix
-			return Notiflix.Notify.failure('Please choose a date in the future');
-			
+			return Notiflix.Notify.failure('Please choose a date in the future', {
+					// налаштування для повідомлення
+				width: '320px',
+				fontSize: '16px',
+				position: 'center-top',
+			});	
 		}
-		if (selectedDates[0] > Date.now())
+	
+		if (selectedDates[0] >= Date.now())
 		{
 			btnStart.disabled = false;
-	
 			}
-	
 	},
 };
   
@@ -61,17 +61,19 @@ flatpickr("#datetime-picker", options);
 
 
 function onBtnStartClick() {
-
-		// перевірка стану таймера
-	if (isTimerStarted) {
-			return;
-	}
-	
-		isTimerStarted = true;
+		// при запуску таймера кнопка Start стає неактивною
+	btnStart.disabled = true;
+		// при запуску таймера календар стає доступним для вибору
+	inputDateRef.setAttribute('disabled', true);
+		// отримуємо вибрану користувачем дату з інпута
 	const futureTime = new Date(inputDateRef.value);
 
+		
 	const setIntervalId = setInterval(() => {
+			// вираховуємо різницю між майбутнім часом і поточним
 		const delta = futureTime - Date.now();
+
+			// щоб таймер зупинявся на 00:00:00 і не виводив мінусових значень
 		if (delta >= 0) {
 		const timeObj = convertMs(delta);
 		valueDays.textContent = addLeadingZero(timeObj.days);
@@ -81,7 +83,6 @@ function onBtnStartClick() {
 		}
 				
 	}, 1000)
-	
 }
 
 	// функцію addLeadingZero(value), яка використовує метод padStart()
