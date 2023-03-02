@@ -15,7 +15,7 @@ refs.form.addEventListener('submit', onBtnCreatePromiseClick);
 function onBtnCreatePromiseClick(event) {
   event.preventDefault();
 
-  const firstDelay = parseInt(refs.firstDelay.value);
+  let firstDelay = parseInt(refs.firstDelay.value);
   const step = parseInt(refs.stepDelay.value);
   const amount = parseInt(refs.amount.value);
 
